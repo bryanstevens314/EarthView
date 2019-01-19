@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: black;
 }
 
 a {
@@ -18,4 +19,24 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+.loading {
+  color: white;
+}
+.earth_Div {
+  text-align: center;
+}
+.earth_Image {
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  /*
+    Introduced in IE 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
 }

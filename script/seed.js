@@ -1,18 +1,31 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Earth, Satellite} = require('../server/db/models')
+const {getEarth, fetchSatellites} = require('./NASA_api')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+  const earth = await getEarth()
+  const satellite = await fetchSatellites()
+  console.log(satellite)
+  for (const obj of earth) {
+    try {
+      await Earth.create(obj)
+    } catch (err) {
+      console.log('ERROR')
+    }
+  }
+  for (const coordinates of satellite) {
+    try {
+      await Satellite.create(coordinates)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-
-  console.log(`seeded ${users.length} users`)
+  //console.log(`seeded ${earth.length} images`)
   console.log(`seeded successfully`)
 }
 
