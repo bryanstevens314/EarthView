@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
   background-color: black;
+  position: sticky;
 }
 
 a {
@@ -20,13 +21,30 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-.loading {
+.satellites {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+.satellites > tbody {
   color: white;
+}
+
+.left_Graphs {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  width: 1300px;
 }
 .earth_Div {
   text-align: center;
+  color: white;
 }
 .earth_Image {
+  text-align: center;
+}
+.earth_Image > img {
+  margin-top: -150px;
   pointer-events: none;
   user-select: none;
   -moz-user-select: -moz-none;

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-import {callbackify} from 'util'
 
 /**
  * ACTION TYPES
@@ -16,13 +15,14 @@ const defaultEarthViews = {
   earth: [],
   currentImage: '',
   currentIndex: 0,
-  earthImagesArray: []
+  earthImagesArray: [],
+  satellite: []
 }
 
 /**
  * ACTION CREATORS
  */
-const gotEarthViews = earth => ({type: FETCH_EARTH_VIEWS, earth})
+const gotEarthViews = obj => ({type: FETCH_EARTH_VIEWS, obj})
 const decrement = () => ({type: DECREMENT})
 const increment = () => ({type: INCREMENT})
 
@@ -62,17 +62,17 @@ export default function(state = defaultEarthViews, action) {
   switch (action.type) {
     case FETCH_EARTH_VIEWS:
       const earthImagesArray = []
-      action.earth.map(obj => {
+      action.obj.earth.map(obj => {
         earthImagesArray.push(obj.imageUrl)
       })
       return {
-        earth: action.earth,
+        earth: action.obj.earth,
+        satellite: action.obj.satellite,
         earthImagesArray,
-        currentImage: action.earth[action.earth.length - 1].imageUrl,
-        currentIndex: action.earth.length - 1
+        currentImage: action.obj.earth[action.obj.earth.length - 1].imageUrl,
+        currentIndex: action.obj.earth.length - 1
       }
     case DECREMENT:
-      console.log('DECREMENT', state.currentIndex)
       if (state.currentIndex !== 0) {
         return {
           ...state,
@@ -83,7 +83,6 @@ export default function(state = defaultEarthViews, action) {
         return state
       }
     case INCREMENT:
-      console.log('INCREMENT', state.currentIndex)
       if (state.currentIndex !== state.earth.length - 1) {
         return {
           ...state,
